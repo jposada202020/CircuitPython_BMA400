@@ -10,7 +10,7 @@ requires = [
 ]
 
 [project]
-name = "bma400"
+name = "circuitpython-bma400"
 description = "BMA400 Bosch Accelerometer CircuitPython Driver"
 version = "0.0.0+auto.0"
 readme = "README.rst"
