@@ -16,9 +16,9 @@ BMA400 Bosch Accelerometer CircuitPython Driver
 from micropython import const
 from adafruit_bus_device import i2c_device
 from adafruit_register.i2c_struct import ROUnaryStruct
+from adafruit_register.i2c_bits import RWBits
 
 # from adafruit_register.i2c_struct import ROUnaryStruct, UnaryStruct
-# from adafruit_register.i2c_bits import RWBits
 
 try:
     from busio import I2C
@@ -31,6 +31,14 @@ __repo__ = "https://github.com/jposada202020/CircuitPython_BMA400.git"
 
 
 _REG_WHOAMI = const(0x90)
+_ACC_CONFIG0 = const(0x19)
+
+# Power Modes
+SLEEP_MODE = const(0x00)
+LOW_POWER_MODE = const(0x01)
+NORMAL_MODE = const(0x02)
+SWITCH_TO_SLEEP = const(0x03)
+power_mode_values = (SLEEP_MODE, LOW_POWER_MODE, NORMAL_MODE, SWITCH_TO_SLEEP)
 
 # pylint: disable=too-few-public-methods
 class BMA400:
@@ -68,8 +76,43 @@ class BMA400:
 
     _device_id = ROUnaryStruct(_REG_WHOAMI, "B")
 
+    # ACC_CONFIG0 (0x19)
+    # | filt1_bw | osr_lp(1) | osr_lp(0) | ---- | ---- | ---- | power_mode(1) | power_mode(0) |
+    _power_mode = RWBits(2, _ACC_CONFIG0, 0)
+
     def __init__(self, i2c_bus: I2C, address: int = 0x14) -> None:
         self.i2c_device = i2c_device.I2CDevice(i2c_bus, address)
 
         if self._device_id != 0x90:
             raise RuntimeError("Failed to find BMA400")
+
+    @property
+    def power_mode(self) -> str:
+        """
+        Sensor power_mode
+
+        +------------------------------------+------------------+
+        | Mode                               | Value            |
+        +====================================+==================+
+        | :py:const:`bma400.SLEEP_MODE`      | :py:const:`0x00` |
+        +------------------------------------+------------------+
+        | :py:const:`bma400.LOW_POWER_MODE`  | :py:const:`0x01` |
+        +------------------------------------+------------------+
+        | :py:const:`bma400.NORMAL_MODE`     | :py:const:`0x02` |
+        +------------------------------------+------------------+
+        | :py:const:`bma400.SWITCH_TO_SLEEP` | :py:const:`0x03` |
+        +------------------------------------+------------------+
+        """
+        values = (
+            "SLEEP_MODE",
+            "LOW_POWER_MODE",
+            "NORMAL_MODE",
+            "SWITCH_TO_SLEEP",
+        )
+        return values[self._power_mode]
+
+    @power_mode.setter
+    def power_mode(self, value: int) -> None:
+        if value not in power_mode_values:
+            raise ValueError("Value must be a valid power_mode setting")
+        self._power_mode = value
