@@ -15,8 +15,10 @@ BMA400 Bosch Accelerometer CircuitPython Driver
 
 from micropython import const
 from adafruit_bus_device import i2c_device
-from adafruit_register.i2c_struct import ROUnaryStruct, UnaryStruct
-from adafruit_register.i2c_bits import RWBits
+from adafruit_register.i2c_struct import ROUnaryStruct
+
+# from adafruit_register.i2c_struct import ROUnaryStruct, UnaryStruct
+# from adafruit_register.i2c_bits import RWBits
 
 try:
     from busio import I2C
@@ -30,7 +32,7 @@ __repo__ = "https://github.com/jposada202020/CircuitPython_BMA400.git"
 
 _REG_WHOAMI = const(0x90)
 
-
+# pylint: disable=too-few-public-methods
 class BMA400:
     """Driver for the BMA400 Sensor connected over I2C.
 
@@ -63,6 +65,7 @@ class BMA400:
         accx, accy, accz = bma.acceleration
 
     """
+
     _device_id = ROUnaryStruct(_REG_WHOAMI, "B")
 
     def __init__(self, i2c_bus: I2C, address: int = 0x14) -> None:
