@@ -15,8 +15,8 @@ Introduction
     :alt: Total PyPI downloads
     :target: https://pepy.tech/project/circuitpython-bma400
 
-.. image:: https://github.com/CircuitPython_BMA400/workflows/Build%20CI/badge.svg
-    :target: https://github.com/CircuitPython_BMA400/actions
+.. image:: https://github.com/jposada202020/CircuitPython_BMA400/workflows/Build%20CI/badge.svg
+    :target: https://github.com/jposada202020/CircuitPython_BMA400/actions
     :alt: Build Status
 
 .. image:: https://img.shields.io/badge/code%20style-black-000000.svg
