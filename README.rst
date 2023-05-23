@@ -98,11 +98,3 @@ Take a look at the examples directory
 Documentation
 =============
 API documentation for this library can be found on `Read the Docs <https://circuitpython-bma400.readthedocs.io/>`_.
-
-
-Contributing
-============
-
-Contributions are welcome! Please read our `Code of Conduct
-<https://github.com/jposada202020/CircuitPython_/blob/HEAD/CODE_OF_CONDUCT.md>`_
-before contributing to help this project stay welcoming.

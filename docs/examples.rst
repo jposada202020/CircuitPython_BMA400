@@ -41,7 +41,7 @@ Example showing the Acc range setting
 
 .. literalinclude:: ../examples/bma400_acc_range.py
     :caption: examples/bma400_acc_range.py
-    :linenos:
+    :lines: 5-
 
 Source data registers settings
 -------------------------------
@@ -50,7 +50,7 @@ Example showing the Source data registers setting
 
 .. literalinclude:: ../examples/bma400_source_data_registers.py
     :caption: examples/bma400_source_data_registers.py
-    :linenos:
+    :lines: 5-
 
 Filter bandwidth settings
 --------------------------
@@ -59,4 +59,4 @@ Example showing the Filter bandwidth setting
 
 .. literalinclude:: ../examples/bma400_filter_bandwidth.py
     :caption: examples/bma400_filter_bandwidth.py
-    :linenos:
+    :lines: 5-

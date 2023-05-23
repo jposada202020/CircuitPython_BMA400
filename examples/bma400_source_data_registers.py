@@ -9,7 +9,7 @@ import bma400
 i2c = board.I2C()
 bma = bma400.BMA400(i2c)
 
-bma.source_data_registers = bma400.ACC_FILT_LP
+bma.source_data_registers = bma400.ACC_FILT2
 
 while True:
     for source_data_registers in bma400.source_data_registers_values:
